@@ -1,0 +1,13 @@
+{
+  "name": "W3TransferHacathon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:fe": "pnpm --filter frontend run dev",
+    "dev:be": "pnpm --filter backend run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
