@@ -61,20 +61,20 @@ app.post("/transfer", authenticateToken, async (req, res) => {
   res.send({ nftId });
 
   // Spawn a background worker to handle the time-consuming task
-  try {
-    const result = await spawnWorker({
-      receivingAddress: req.body.address,
-      receiverEmail: req.body.receiverEmail,
-      senderEmail: req.body.senderEmail,
-      message: req.body.message,
-      fileName: req.body.fileData.name,
-      fileContent: req.body.fileData.content,
-      nftId,
-    });
-    console.log("Background task result:", result);
-  } catch (err) {
-    console.error("Background task error:", err);
-  }
+  // try {
+  //   const result = await spawnWorker({
+  //     receivingAddress: req.body.address,
+  //     receiverEmail: req.body.receiverEmail,
+  //     senderEmail: req.body.senderEmail,
+  //     message: req.body.message,
+  //     fileName: req.body.fileData.name,
+  //     fileContent: req.body.fileData.content,
+  //     nftId,
+  //   });
+  //   console.log("Background task result:", result);
+  // } catch (err) {
+  //   console.error("Background task error:", err);
+  // }
 });
 
 app.listen(port, () => {

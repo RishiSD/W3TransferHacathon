@@ -1,43 +1,19 @@
-import { useAccount, useConnect, useDisconnect } from "wagmi";
-import { injected } from "wagmi/connectors";
+//App.js
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+import Download from "./components/Download";
 
 function App() {
-  const account = useAccount();
-  const { connectors, connect, status, error } = useConnect();
-  const { disconnect } = useDisconnect();
-
   return (
-    <>
-      <div>
-        <h2>Account</h2>
-
-        <div>
-          status: {account.status}
-          <br />
-          addresses: {JSON.stringify(account.addresses)}
-          <br />
-          chainId: {account.chainId}
-        </div>
-
-        {account.status === "connected" ? (
-          <button type="button" onClick={() => disconnect()}>
-            Disconnect
-          </button>
-        ) : (
-          <button
-            onClick={() => connect({ connector: injected() })}
-            type="button"
-          >
-            Connect
-          </button>
-        )}
-      </div>
-
-      <div>
-        <div>{status}</div>
-        <div>{error?.message}</div>
-      </div>
-    </>
+    <div className="App">
+      <h2 className="text-5xl font-serif font-bold italic text-gray-900 text-center mb-6 pt-6">
+        W3Transfer
+      </h2>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/download" element={<Download />} />
+      </Routes>
+    </div>
   );
 }
 
