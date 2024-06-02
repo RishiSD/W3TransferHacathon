@@ -38,6 +38,10 @@ export const spawnWorker = (workerData: ITransferData) => {
 
 const port = process.env.PORT ? +process.env.PORT : 3000;
 
+app.get("/health", async (req, res) => {
+  res.json({ health: "ok" });
+});
+
 app.get("/session-token", async (req, res) => {
   const response = await apillonAuthAPI.get("/auth/session-token");
   res.json(response.data);
