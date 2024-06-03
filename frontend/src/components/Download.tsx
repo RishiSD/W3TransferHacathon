@@ -1,14 +1,20 @@
 import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi';
 import { injected } from 'wagmi/connectors';
 import { useSearchParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { switchChain, verifyMessage } from 'wagmi/actions';
+import { useEffect, useState } from 'react';
+import { switchChain } from 'wagmi/actions';
 import { config } from '../wagmi';
 import { decryptContent, saveFile } from '../utils/phala';
 import { moonbaseAlpha } from 'wagmi/chains';
+import { PopUp } from './popup';
 
 const Download = () => {
   const [searchParams] = useSearchParams();
+  const [popup, setPopup] = useState<{ open: boolean; message: string }>({
+    open: false,
+    message: '',
+  });
+  const [isDownloading, setIsDownloading] = useState<boolean>(false);
   const nftId = searchParams.get('nftId');
   if (!nftId)
     return (
@@ -35,7 +41,26 @@ const Download = () => {
     const timestamp = new Date().getTime() - 60 * 1000;
     const message = `APILLON_REQUEST_MSG: ${timestamp}`;
     const signature = await signMessageAsync({ message });
-    const decryptValue = await decryptContent(+nftId, timestamp, signature.replace('0x', ''));
+    let decryptValue;
+    setIsDownloading(true);
+    try {
+      decryptValue = await decryptContent(+nftId, timestamp, signature.replace('0x', ''));
+      setIsDownloading(false);
+    } catch (error) {
+      if (error.message.includes('NotNftOwner')) {
+        setPopup({
+          open: true,
+          message: 'You are not the owner of NFT needed to access the file.',
+        });
+      } else {
+        setPopup({
+          open: true,
+          message: error.message,
+        });
+      }
+      return;
+    }
+
     saveFile(decryptValue);
   };
 
@@ -63,10 +88,11 @@ const Download = () => {
               </p>
               <button
                 type="button"
-                className="w-full mt-4 py-2 px-4 bg-sky-600 text-white rounded-md shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                disabled={isDownloading}
+                className="w-full mt-4 py-2 px-4 bg-sky-600 text-white rounded-md shadow-sm  disabled:bg-slate-50 disabled:text-slate-500 hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 onClick={() => download()}
               >
-                Download
+                {isDownloading ? 'Downloading...' : 'Download'}
               </button>
             </>
           ) : (
@@ -89,6 +115,12 @@ const Download = () => {
           <div>{error?.message}</div>
         </div>
       </article>
+      <PopUp
+        open={popup.open}
+        popupText={popup.message}
+        buttonText="Ok"
+        onClose={() => setPopup({ open: false, message: '' })}
+      />
     </div>
   );
 };

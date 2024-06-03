@@ -39,7 +39,7 @@ const transfer = async ({
   const collection = await nft
     .collection(apillonServiceIds.nftCollectionUUID)
     .get();
-  const downloadLink = `${process.env.FRONTEND_URL}/download?nftId=${nftId}`;
+  const downloadLink = `${process.env.FRONTEND_URL}/#/download?nftId=${nftId}`;
 
   const { data, error } = await resend.emails.send({
     from: "W3Transfer <onboarding@resend.dev>",

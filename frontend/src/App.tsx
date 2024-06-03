@@ -1,7 +1,7 @@
 //App.js
-import { Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
-import Download from "./components/Download";
+import { Route, Routes } from 'react-router-dom';
+import Home from './components/Home';
+import Download from './components/Download';
 
 function App() {
   return (

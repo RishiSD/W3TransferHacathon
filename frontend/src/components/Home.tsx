@@ -106,7 +106,7 @@ function Home() {
         body: JSON.stringify(reqBody),
       })
         .then(response => response.json())
-        .then(result => {
+        .then(() => {
           setPopupOpen(true);
         })
         .catch(error => {
