@@ -39,7 +39,13 @@ On clicking send the frontend calls the backend `/transfer` endpoint which uses 
 
 Clicking 'Get the file' button in the email will redirect the receiver to the download page. Here the receiver needs to connect Ethereum user wallet address mentioned in the email. Once connected the download button will be enabled clicking on which will ask the user to sign a message. Once the message is verified the user is prompted to save the decrypted file. If the user connects with a different wallet address then an error message will be displayed.
 
+![image](https://github.com/RishiSD/W3TransferHacathon/assets/14894488/1a09e022-0c86-41ef-81a1-e6f182b46a00)
+
+
 # Run in local
+
+Create a new NFT Collection in Apillion Dashboard. Create a new computing contract for Schrödingers NFT and connect it with the NFT collection created previously.
+Create an API key in the dashboard to be used in the backend .env.
 
 Clone the project
 
