@@ -47,6 +47,7 @@ const Download = () => {
       decryptValue = await decryptContent(+nftId, timestamp, signature.replace('0x', ''));
       setIsDownloading(false);
     } catch (error) {
+      // @ts-ignore
       if (error.message.includes('NotNftOwner')) {
         setPopup({
           open: true,
@@ -55,6 +56,7 @@ const Download = () => {
       } else {
         setPopup({
           open: true,
+          // @ts-ignore
           message: error.message,
         });
       }
