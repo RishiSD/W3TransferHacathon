@@ -7,6 +7,7 @@
 W3Transfer is a decentralised file sharing platform built on Polkadot powered by the [Apillion](https://apillon.io/) platform.
 Its like WeTransfer but better since the files that are shared are stored encrypted and decentralised, such that they can only be decrypted by signature of the receiver.
 
+Demo Url: Demo Url: https://youtu.be/mhfPuB-Id7s
 
 # Technologies Used
 
@@ -40,8 +41,6 @@ On clicking send the frontend calls the backend `/transfer` endpoint which uses 
 Clicking 'Get the file' button in the email will redirect the receiver to the download page. Here the receiver needs to connect Ethereum user wallet address mentioned in the email. Once connected the download button will be enabled clicking on which will ask the user to sign a message. Once the message is verified the user is prompted to save the decrypted file. If the user connects with a different wallet address then an error message will be displayed.
 
 ![image](https://github.com/RishiSD/W3TransferHacathon/assets/14894488/1a09e022-0c86-41ef-81a1-e6f182b46a00)
-
-Demo Url: https://youtu.be/UnN5lU7uC6k
 
 # Deployed Frontend
 
